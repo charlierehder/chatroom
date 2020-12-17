@@ -32,6 +32,8 @@ void *handle_client(void *args) {
     int client_id = client->client_id;
     char *username = client->username;
 
+    signal(SIGPIPE, SIG_IGN);
+
     while(1) {
 
         size_t msg_size = 0;
@@ -39,6 +41,9 @@ void *handle_client(void *args) {
 
         char msg[msg_size];
         read_from_fd(client_fd, msg, msg_size);
+        if (strncmp("!exit", msg, 5) == 0) {
+            break;
+        }
 
         size_t n_msg_size = msg_size + 2 + strlen(username);
 
@@ -54,7 +59,7 @@ void *handle_client(void *args) {
 
     }
 
-    return NULL;
+    pthread_exit(NULL);
 
 }
 
@@ -122,6 +127,7 @@ int main(int argc, char *argv[]) {
         fprintf(stderr, "%s connected\n", client->username);
 
         pthread_create(&threads[client_id], NULL, handle_client, (void *)client);
+        pthread_detach(threads[client_id]);
 
         client_id++;
 

@@ -55,6 +55,8 @@ void *listenToStdin(void *args) {
         ssize_t bytes_read = getline(&msg, &msg_size, stdin);
         if (strncmp("!exit", msg, 5) == 0) {
             LOG("Exiting...");
+            write_to_fd(socket_fd, &bytes_read, 8);
+            write_to_fd(socket_fd, msg, bytes_read);
             pthread_mutex_lock(&m);
             exit_requested = 1;
             pthread_mutex_unlock(&m);
