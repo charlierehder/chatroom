@@ -13,10 +13,6 @@ size_t get_file_size (int fd) {
 
 }
 
-ssize_t read_from_stdin (char *buffer, size_t buf_size) {
-    return 0;
-}
-
 ssize_t write_to_fd (int fd, void *buffer, size_t count) {
 
     ssize_t total_bytes = 0;

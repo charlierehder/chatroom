@@ -8,13 +8,6 @@
 * the size of the file pointed to by 'fd' as a size_t.
 */
 size_t get_file_size(int fd);
-/*
-* Reads from stdin until there is a newline or until the buffer is 
-* full based on the provided buffer size. 
-*
-* Returns the number of bytes read from stdin
-*/
-ssize_t read_from_stdin (char *buffer, size_t buf_size);
 
 /*
 * Writes 'count' bytes from 'buffer' to 'fd'. Assumes 'fd' is open
