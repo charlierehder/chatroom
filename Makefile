@@ -2,6 +2,8 @@ CC=gcc
 CFLAGS=-g -pthread
 SRC=src
 
+all: client server
+
 client: client.o common.o
 	$(CC) $(CFLAGS) -o client client.o common.o
 
