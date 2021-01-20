@@ -1,1 +1,6 @@
-
+client
+server
+server.o
+client.o
+common.o
+vector.o
